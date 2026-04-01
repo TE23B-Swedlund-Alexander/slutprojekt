@@ -2,12 +2,8 @@ using System.Dynamic;
 
 public class Item
 {
-string name;
-int rarity;
+public string name {get;set;}
+public int rarity{get;set;}
 
-protected void setStats(string namee , int rarityy)
-    {
-        name=namee;
-        rarity=rarityy;
-    }
+
 }

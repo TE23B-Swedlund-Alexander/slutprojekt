@@ -4,14 +4,24 @@ string run = "y";
 while (run == "y")
 {
     Weapon wep = new Weapon();
-string name = Console.ReadLine();
+    Console.WriteLine("wep name");
+wep.name= Console.ReadLine();
+Console.WriteLine("wep dmg");
 string sDmg = Console.ReadLine();
+Console.WriteLine("wep rarity");
 string sRarity = Console.ReadLine();
-int.TryParse
+int Rarity;
+int Dmg;
+int.TryParse (sRarity, out Rarity);
+int.TryParse (sDmg, out Dmg);
+wep.rarity=Rarity;
+wep.dmg=Dmg;
 
-    wep.sSetStats();
 
 
+  
+
+string json = JsonSerializer.Serialize<Weapon>(wep);
 
 
 

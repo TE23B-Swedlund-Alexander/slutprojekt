@@ -1,16 +1,7 @@
 public  class Armor : Item
 {
-    private int protection;
+    public int protection{get;set;}
 
-    public void setProt(int amount)
-    {
-        protection= amount;
 
-    }
-public int getProt()
-    {
-        
-return protection;
-    }
 
 }

@@ -1,0 +1,15 @@
+C:\Users\alexander.swedlund\prog2\slutprojekt\slutprojekt\bin\Debug\net8.0\slutprojekt.exe
+C:\Users\alexander.swedlund\prog2\slutprojekt\slutprojekt\bin\Debug\net8.0\slutprojekt.deps.json
+C:\Users\alexander.swedlund\prog2\slutprojekt\slutprojekt\bin\Debug\net8.0\slutprojekt.runtimeconfig.json
+C:\Users\alexander.swedlund\prog2\slutprojekt\slutprojekt\bin\Debug\net8.0\slutprojekt.dll
+C:\Users\alexander.swedlund\prog2\slutprojekt\slutprojekt\bin\Debug\net8.0\slutprojekt.pdb
+C:\Users\alexander.swedlund\prog2\slutprojekt\slutprojekt\obj\Debug\net8.0\slutprojekt.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alexander.swedlund\prog2\slutprojekt\slutprojekt\obj\Debug\net8.0\slutprojekt.AssemblyInfoInputs.cache
+C:\Users\alexander.swedlund\prog2\slutprojekt\slutprojekt\obj\Debug\net8.0\slutprojekt.AssemblyInfo.cs
+C:\Users\alexander.swedlund\prog2\slutprojekt\slutprojekt\obj\Debug\net8.0\slutprojekt.csproj.CoreCompileInputs.cache
+C:\Users\alexander.swedlund\prog2\slutprojekt\slutprojekt\obj\Debug\net8.0\slutprojekt.sourcelink.json
+C:\Users\alexander.swedlund\prog2\slutprojekt\slutprojekt\obj\Debug\net8.0\slutprojekt.dll
+C:\Users\alexander.swedlund\prog2\slutprojekt\slutprojekt\obj\Debug\net8.0\refint\slutprojekt.dll
+C:\Users\alexander.swedlund\prog2\slutprojekt\slutprojekt\obj\Debug\net8.0\slutprojekt.pdb
+C:\Users\alexander.swedlund\prog2\slutprojekt\slutprojekt\obj\Debug\net8.0\slutprojekt.genruntimeconfig.cache
+C:\Users\alexander.swedlund\prog2\slutprojekt\slutprojekt\obj\Debug\net8.0\ref\slutprojekt.dll
