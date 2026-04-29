@@ -79,7 +79,7 @@ public void SetStats(int Mhp, string namee)
         bonusDmg+=5;
     }
 
-    public void attack(Enemy target)
+    public void Attack(Enemy target)
     {
       int dmg =  equipedWeapon[0].GetDmg();
         target.TakeDmg(dmg);

@@ -4,7 +4,7 @@ public class Enemy
 {
     protected int hp;
     protected int armor;
-    protected string name;
+    public string name;
     protected int maxDmg;
     protected int minDmg;
     protected int lootRarityMod; // how good the loot will be when i make the enemies drop loot

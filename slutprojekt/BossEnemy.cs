@@ -3,7 +3,7 @@
     public void SpecialAttackArmorBreak(Player target)
     { // special attack variation that lowers player armor making subsequent attacks deal more dmg
         float armorBreak = Random.Shared.Next(minDmg,maxDmg);
-        armorBreak = armorBreak/10;
+        armorBreak = armorBreak/10; //divided by 10 because removing the full damage from the armor is op
        int armorBroken = Convert.ToInt32(armorBreak);
         Attack(target); 
         target.ChangeArmorStat(-armorBroken);
