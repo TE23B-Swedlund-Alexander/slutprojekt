@@ -59,9 +59,9 @@ while (gameRunning == true)
             SmallEnemy minion = new SmallEnemy();
             goon.setLeader(bigBoss);
             minion.setLeader(bigBoss);
-            bigBoss.SetStats(Random.Shared.Next(30, 50), Random.Shared.Next(3, 7), Random.Shared.Next(10, 15), Random.Shared.Next(5, 8), Random.Shared.Next(3, 5), Random.Shared.Next(10, 20), "Boss Monster");
-            goon.SetStats(Random.Shared.Next(5, 15), Random.Shared.Next(0, 5), Random.Shared.Next(5, 9), Random.Shared.Next(2, 4), Random.Shared.Next(1, 3), Random.Shared.Next(3, 12), "Goon");
-            minion.SetStats(Random.Shared.Next(5, 15), Random.Shared.Next(0, 5), Random.Shared.Next(5, 9), Random.Shared.Next(2, 4), Random.Shared.Next(1, 3), Random.Shared.Next(3, 12), "Minion");
+            bigBoss.name= "Boss";
+            goon.name="Goon";
+            minion.name="Minion";
 
 
             bigFoe.Add(bigBoss);
@@ -89,10 +89,10 @@ while (gameRunning == true)
 
         for (int i = 0; i < smallFoes.Count; i++)
         {
-                smallFoes[i].SmallEnemyTick();  
+             
                 
         }
-        bigFoe[0].TimeTick();
+        
         
     }
 

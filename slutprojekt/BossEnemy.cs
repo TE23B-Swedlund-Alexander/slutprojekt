@@ -1,5 +1,17 @@
 ﻿public class BossEnemy : Enemy
 {
+     public BossEnemy()
+    {
+
+        hp = Random.Shared.Next(30, 50);
+        armor = Random.Shared.Next(3, 7);
+        maxDmg = Random.Shared.Next(10, 15);
+        minDmg = Random.Shared.Next(5, 8);
+        lootRarityMod = Random.Shared.Next(3, 5);
+        xpReward = Random.Shared.Next(20, 30);
+
+    }
+
     public void SpecialAttackArmorBreak(Player target)
     { // special attack variation that lowers player armor making subsequent attacks deal more dmg
         float armorBreak = Random.Shared.Next(minDmg,maxDmg);

@@ -26,7 +26,7 @@ public class Enemy
         int dmg = Random.Shared.Next(minDmg, maxDmg);
         target.ChangeCurrentHp(dmg);
     }
-    public void TimeTick() // will hapen at end of round
+   virtual public void TimeTick() // will hapen at end of round
     {
         if (hp <= 0)
         {

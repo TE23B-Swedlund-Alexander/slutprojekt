@@ -1,19 +1,36 @@
 public class SmallEnemy : Enemy
 {
-  private BossEnemy leader;
-
-public void setLeader(BossEnemy led)
+    public SmallEnemy()
     {
-        leader=led;
+
+        hp = Random.Shared.Next(5, 15);
+        armor = Random.Shared.Next(0, 5);
+        maxDmg = Random.Shared.Next(5, 9);
+        minDmg = Random.Shared.Next(2, 4);
+        lootRarityMod = Random.Shared.Next(1, 3);
+        xpReward = Random.Shared.Next(3, 12);
+
     }
 
-    public void SmallEnemyTick() // special small enemy end of round event were it escapes if the boss is dead
+    private BossEnemy leader;
+
+    public void setLeader(BossEnemy led)
+    {
+        leader = led;
+    }
+
+    public override void TimeTick() // special small enemy end of round event were it escapes if the boss is dead
     {
         if (leader.isAlive == false)
         {
             RunAway();
+            if (hp <= 0)
+            {
+                isAlive = false;
+                Console.WriteLine($"{name} died");
+            }
         }
-        TimeTick();
+
     }
     private void RunAway()
     {
