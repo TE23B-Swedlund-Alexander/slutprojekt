@@ -9,7 +9,8 @@ public class Player
     private int armor;
     private int bonusDmg;
     private int effectivArmor;
-    private List<Item> inventory;
+    public List<Weapon> weaponsInInventory;
+    public List<Armor> armorInInventory;
     private List<Weapon> equipedWeapon;
     private List<Armor> equipedArmor;
     private int xp;
@@ -38,24 +39,18 @@ public class Player
         }
         if (hp <= 0)
         {
-            
+
         }
     }
-    
-    public void RemoveItemFromInventory(int i)
-    {
-        inventory.Remove(inventory[i]);
-    }
 
-    public void AddItemToInventory(Item thingy)
-    {
-        inventory.Add(thingy);
-    }
 
-    public void EquipWeapon(Weapon W)
+
+    public void EquipWeapon(int w)
     {
+
+
         equipedWeapon.Remove(equipedWeapon[0]);
-        equipedWeapon.Add(W);
+        equipedWeapon.Add(weaponsInInventory[w]);
     }
 
     public void EquipArmor(Armor A)
@@ -64,26 +59,26 @@ public class Player
         equipedArmor.Add(A);
     }
 
-public void SetStats(int Mhp, string namee)
+    public void SetStats(int Mhp, string namee)
     {
-        maxHp=Mhp;
-        name=namee;
+        maxHp = Mhp;
+        name = namee;
     }
 
     public void LevelUp()
     {
-        maxHp+=10;
-        armor+=5;
-        xp=0;
-        xpToLevel+=20;
-        bonusDmg+=5;
+        maxHp += 10;
+        armor += 5;
+        xp = 0;
+        xpToLevel += 20;
+        bonusDmg += 5;
     }
 
     public void Attack(Enemy target)
     {
-      int dmg =  equipedWeapon[0].GetDmg();
+        int dmg = equipedWeapon[0].GetDmg();
         target.TakeDmg(dmg);
     }
 
-    
+
 }

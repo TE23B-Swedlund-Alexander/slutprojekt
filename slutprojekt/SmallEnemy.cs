@@ -21,14 +21,14 @@ public class SmallEnemy : Enemy
 
     public override void TimeTick() // special small enemy end of round event were it escapes if the boss is dead
     {
-        if (leader.isAlive == false)
-        {
-            RunAway();
             if (hp <= 0)
             {
                 isAlive = false;
                 Console.WriteLine($"{name} died");
             }
+        if (leader.AliveCheck() == false)
+        {
+            RunAway();
         }
 
     }
@@ -37,5 +37,7 @@ public class SmallEnemy : Enemy
         xpReward = 0;
         lootRarityMod = 0;
         hp = 0;
+        isAlive=false;
+        Console.WriteLine($"{name} ran away");
     }
 }
