@@ -20,7 +20,7 @@ List<Weapon> weaponSets = [];
 List<string> armorNamesForDeserialization = JsonSerializer.Deserialize<List<string>>(armorss); //här deserialiseras listan
 List<string> weaponNamesForDeserialization = JsonSerializer.Deserialize<List<string>>(weaponss);
 
-Dictionary<string, object> weapons = new Dictionary<string, object>();
+
 
 for (int i = 0; i < armorNamesForDeserialization.Count; i++) // här deserialiseras all Armor och hamnar i lootpoolen
 {
@@ -31,6 +31,7 @@ for (int i = 0; i < armorNamesForDeserialization.Count; i++) // här deserialise
 
 }
 for (int i = 0; i < weaponNamesForDeserialization.Count; i++) // samma som förra fast weapon
+
 {
     string jsonWeapon = File.ReadAllText($"{weaponNamesForDeserialization[i]}.json");
 
@@ -39,9 +40,14 @@ for (int i = 0; i < weaponNamesForDeserialization.Count; i++) // samma som förr
     weaponSets.Add(wep);
 
 }
-Guy.weaponsInInventory.Add(weaponSets[0]);
+
+Console.WriteLine(weaponSets[0].name);
+
+Guy.AddWeaponToInventory(weaponSets[0]);
+
 Guy.EquipWeapon(0);
 
+Console.WriteLine("e");
 bool gameRunning = true;
 while (gameRunning == true) // själva game loopen
 {
@@ -81,42 +87,54 @@ while (gameRunning == true) // själva game loopen
             Console.WriteLine("do you want to switch 1. weapon or 2. armor");
             bool weaponOrArmor = false; // did they want to switch or not
             while (weaponOrArmor == false)
-                Console.WriteLine("type 1 for weapon or 2 for armor");
-            string wepOrArm = Console.ReadLine();
-            if (wepOrArm == "1")
             {
-                while (true)
-                {
-                    Console.WriteLine($"weapons available:");
-                    for (int i = 0; i < Guy.weaponsInInventory.Count; i++)
-                    {
 
-                        Console.WriteLine(Guy.weaponsInInventory[i].name);
-                    }
-                    Console.WriteLine("what weapon do you want to equip? if you dont want to equip a weapon type back");
-                    string theWeapon = Console.ReadLine();
-                    for (int i = 0; i < Guy.weaponsInInventory.Count; i++)
+                Console.WriteLine("type 1 for weapon or 2 for armor or back to stop equiping");
+
+                string wepOrArm = Console.ReadLine();
+
+                if (wepOrArm == "1")
+                {
+                    bool selectingWeapon = true;
+                    while (selectingWeapon == true)
                     {
-                        if (theWeapon == Guy.weaponsInInventory[i].name)
+                        Console.WriteLine($"weapons available:");
+                        for (int i = 0; i < Guy.weaponsInInventory.Count; i++)
                         {
 
+                            Console.WriteLine(Guy.weaponsInInventory[i].name);
                         }
+                        Console.WriteLine("what weapon do you want to equip? if you dont want to equip a weapon type back");
+                        string theWeapon = Console.ReadLine();
+                        for (int i = 0; i < Guy.weaponsInInventory.Count; i++)
+                        {
+                            if (theWeapon == Guy.weaponsInInventory[i].name)
+                            {
+                                Guy.EquipWeapon(i);
+                                selectingWeapon = false;
+                                Console.ReadLine();
+                            }
 
+
+
+
+                        }
+                        if (theWeapon == "back")
+                        {
+
+                            selectingWeapon = false;
+                        }
+                        Console.ReadLine();
                     }
-
-
-
-
-                    return;
                 }
-            }
-            else if (wepOrArm == "2")
-            {
+                else if (wepOrArm == "2")
+                {
 
-            }
-            else
-            {
-                Console.WriteLine("follow the instructions");
+                }
+                else
+                {
+                    Console.WriteLine("follow the instructions");
+                }
             }
         }
 
@@ -193,21 +211,6 @@ while (gameRunning == true) // själva game loopen
         }
         Console.ReadLine();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
