@@ -8,7 +8,7 @@ public class Enemy
     public string name;
     protected int maxDmg;
     protected int minDmg;
-    protected int lootRarityMod; // how good the loot will be when i make the enemies drop loot
+    public int lootRarityMod; // how good the loot will be when i make the enemies drop loot
     protected int xpReward;
     protected bool isAlive=true;
 
@@ -29,6 +29,7 @@ public class Enemy
         {
            isAlive = false;
            Console.WriteLine($"{name} died");
+           
         }
 
     }

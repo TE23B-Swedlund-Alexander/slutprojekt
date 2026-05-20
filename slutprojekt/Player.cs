@@ -83,10 +83,15 @@ if (equipedWeapon.Count > 0)
         Console.WriteLine($"equiped: {equipedWeapon[0].name}");
     }
 
-    public void EquipArmor(Armor A)
+    public void EquipArmor(int w)
     {
+        if (equipedArmor.Count > 0)
+        {
+            
         equipedArmor.Remove(equipedArmor[0]);
-        equipedArmor.Add(A);
+        }
+        equipedArmor.Add(armorInInventory[w]);
+        Console.WriteLine($"equiped: {equipedArmor[0].name}");
     }
 
 public void SetStats(int Mhp, string namee)

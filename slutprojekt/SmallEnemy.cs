@@ -7,7 +7,7 @@ public class SmallEnemy : Enemy
         armor = Random.Shared.Next(0, 5);
         maxDmg = Random.Shared.Next(5, 9);
         minDmg = Random.Shared.Next(2, 4);
-        lootRarityMod = Random.Shared.Next(1, 3);
+        lootRarityMod = Random.Shared.Next(0, 3);
         xpReward = Random.Shared.Next(3, 12);
 
     }

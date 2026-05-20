@@ -93,20 +93,20 @@ while (gameRunning == true) // själva game loopen
 
                 string wepOrArm = Console.ReadLine();
 
-                if (wepOrArm == "1")
+                if (wepOrArm == "1") // om spelaren valde att byta vapen
                 {
                     bool selectingWeapon = true;
                     while (selectingWeapon == true)
                     {
                         Console.WriteLine($"weapons available:");
-                        for (int i = 0; i < Guy.weaponsInInventory.Count; i++)
+                        for (int i = 0; i < Guy.weaponsInInventory.Count; i++) // vilka vapen kan man välja mellan
                         {
 
                             Console.WriteLine(Guy.weaponsInInventory[i].name);
                         }
                         Console.WriteLine("what weapon do you want to equip? if you dont want to equip a weapon type back");
                         string theWeapon = Console.ReadLine();
-                        for (int i = 0; i < Guy.weaponsInInventory.Count; i++)
+                        for (int i = 0; i < Guy.weaponsInInventory.Count; i++)  // kollar om vapnet med namnet som spelaren gav finns i deras inventory
                         {
                             if (theWeapon == Guy.weaponsInInventory[i].name)
                             {
@@ -119,26 +119,73 @@ while (gameRunning == true) // själva game loopen
 
 
                         }
+
                         if (theWeapon == "back")
                         {
 
                             selectingWeapon = false;
+
+                        }
+
+                        if (selectingWeapon == true)
+                        {
+                            Console.WriteLine("you have to spell correctly");
                         }
                         Console.ReadLine();
                     }
                 }
                 else if (wepOrArm == "2")
                 {
+                    bool selectingArmor = true;
+                    while (selectingArmor == true)
+                    {
+                        Console.WriteLine($"Armor sets available:");
+                        for (int i = 0; i < Guy.armorInInventory.Count; i++) // gör samma saker som förra stycket fast med armor
+                        {
 
+                            Console.WriteLine(Guy.armorInInventory[i].name);
+                        }
+                        Console.WriteLine("what armor set do you want to equip? if you dont want to equip any armor type back to equip type the name of the armor you want");
+                        string theArmor = Console.ReadLine();
+                        for (int i = 0; i < Guy.armorInInventory.Count; i++)
+                        {
+                            if (theArmor.ToLower() == Guy.armorInInventory[i].name.ToLower())
+                            {
+                                Guy.EquipArmor(i);
+                                selectingArmor = false;
+                                Console.ReadLine();
+                            }
+
+
+
+
+                        }
+
+                        if (theArmor == "back")
+                        {
+
+                            selectingArmor = false;
+                        }
+
+                        if (selectingArmor == true)
+                        {
+                            Console.WriteLine("you have to spell correctly");
+                        }
+                        Console.ReadLine();
+                    }
+                }
+                else if (wepOrArm=="back") // tillbaka till att välja mellan weapon eller armor
+                {
+                    weaponOrArmor=true; //är de färdiga med att välja ewuipment
                 }
                 else
                 {
-                    Console.WriteLine("follow the instructions");
+                    Console.WriteLine("follow the instructions"); //instruktioner är viktiga
                 }
             }
         }
 
-        Console.WriteLine("start? type y for yes or anything else for no");
+        Console.WriteLine("start? type y for yes or anything else for no"); // startar combat om spelaren vill
         string start = Console.ReadLine();
         if (start == "y")
         {
@@ -201,6 +248,18 @@ while (gameRunning == true) // själva game loopen
             Foes[i].TimeTick(); // updates isAlive bool i enemy
             if (Foes[i].AliveCheck() == false)
             {
+                int weaponOrArmorReward = Random.Shared.Next(1,3);
+                if (weaponOrArmorReward == 1)
+                {
+                    Guy.AddWeaponToInventory(weaponSets[Foes[i].lootRarityMod]);  // hittar vapnet i vapen listan som ligger på samma plats som fiendens loot rarity variabel
+                    Console.WriteLine($"you got a {weaponSets[Foes[i].lootRarityMod].name}");
+                }
+                if (weaponOrArmorReward == 2)
+                {
+                      Guy.AddArmorToInventory(armorSets[Foes[i].lootRarityMod]); // samma som den innan fast för armor
+                    Console.WriteLine($"you got a {armorSets[Foes[i].lootRarityMod].name}");
+                }
+
 
                 Foes.Remove(Foes[i]);
             }
