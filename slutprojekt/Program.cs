@@ -10,7 +10,7 @@ Console.WriteLine("all prompts need to be followed to the letter or they will be
 Player Guy = new Player();
 Console.WriteLine("what is your name"); // låter spelaren välja namn
 string name = Console.ReadLine();
-Guy.SetStats(Random.Shared.Next(20, 40), name); // sätter namn och machp på spelaren
+Guy.SetStats(100, name); // sätter namn och maxhp på spelaren
 
 string armorss = File.ReadAllText("armor.json"); //importerar min lista med namnen till alla Armor klasser som jag serialiserade så att jag kan hämta ut dem igen. .json listan ändras automatiskt om jag lägger till fler armor samma med Weapon istan under
 string weaponss = File.ReadAllText("weapons.json");
@@ -41,13 +41,13 @@ for (int i = 0; i < weaponNamesForDeserialization.Count; i++) // samma som förr
 
 }
 
-Console.WriteLine(weaponSets[0].name);
+
 
 Guy.AddWeaponToInventory(weaponSets[0]);
 
 Guy.EquipWeapon(0);
 
-Console.WriteLine("e");
+
 bool gameRunning = true;
 while (gameRunning == true) // själva game loopen
 {
@@ -56,11 +56,11 @@ while (gameRunning == true) // själva game loopen
     List<Enemy> Foes = []; // där man ser om det finns några levande fiender
     bool enemiesMade = false; // finns det enemies för nästa fight
 
-
-    while (inCombat == false) //
+    while (inCombat == false) // delaen av gameloopen som händer mellan fighterna
     {
+    Guy.resetAfterCombat();
 
-        if (enemiesMade == false) //makes new enemies inbetween combats, rerolling their stats
+        if (enemiesMade == false) //skapar nya fiender efter en fight och innan första fighten
         {
 
             BossEnemy bigBoss = new BossEnemy();
@@ -80,12 +80,12 @@ while (gameRunning == true) // själva game loopen
             enemiesMade = true;
         }
 
-        Console.WriteLine("do you want to switch weapon or armor? type y for yes type anything else for no"); // so that you can switch equipment if you got a better weapon or armor
+        Console.WriteLine("do you want to switch weapon or armor? type y for yes type anything else for no");
         string equipmentSwitch = Console.ReadLine();
         if (equipmentSwitch == "y")
         {
             Console.WriteLine("do you want to switch 1. weapon or 2. armor");
-            bool weaponOrArmor = false; // did they want to switch or not
+            bool weaponOrArmor = false; // välj om spelaren ska byta rustning eller vapen
             while (weaponOrArmor == false)
             {
 
@@ -195,13 +195,22 @@ while (gameRunning == true) // själva game loopen
 
     while (inCombat == true)
     {
-        bool playersTurn = true; // det är spelarens tur
-        for (int i = 2; i < Foes.Count; i++) // enemies take their actions
+        bool playerIsAlive=true;
+        for (int i = 0; i < Foes.Count; i++) // fiendernas tur
         {
-            Foes[0].TakeDmg(100);
+            Foes[i].PickAttack(Guy);
         }
-
-        while (playersTurn == true) //player takes their action
+        Console.WriteLine($"you have {Guy.GetPlayerHp()} hp");
+        bool playersTurn = true; // det är spelarens tur om hen lever
+        if (Guy.GetPlayerHp() <= 0)
+        {
+            playersTurn=false;
+            inCombat=false;
+            Console.WriteLine("you died");
+            playerIsAlive=false;
+            Console.ReadLine();
+        }
+        while (playersTurn == true) //spelarens tur
         {
             Console.WriteLine("your turn");
 
@@ -209,7 +218,7 @@ while (gameRunning == true) // själva game loopen
 
             for (int i = 0; i < Foes.Count; i++)
             {
-                Console.WriteLine($"{i}. {Foes[i].name}");
+                Console.WriteLine($"{i+1}. {Foes[i].name}");
             }
             Console.WriteLine("answer with the nuber infront of the enemy you want to attack");
             bool actualAnswer = false;
@@ -223,11 +232,11 @@ while (gameRunning == true) // själva game loopen
                 int.TryParse(choiceString, out choiceInt);
 
 
-                if (choiceInt < Foes.Count && choiceInt > 0)
+                if (choiceInt < Foes.Count+1 && choiceInt > 0)
                 {
 
 
-                    Guy.Attack(Foes[choiceInt]);
+                    Guy.Attack(Foes[choiceInt-1]);
 
                     actualAnswer = true;
                 }
@@ -240,14 +249,21 @@ while (gameRunning == true) // själva game loopen
 
             playersTurn = false;
         }
-        Console.ReadLine();
+        
 
+      
         for (int i = 0; i < Foes.Count; i++)  //are the enemies alive
         {
 
             Foes[i].TimeTick(); // updates isAlive bool i enemy
+
             if (Foes[i].AliveCheck() == false)
             {
+
+
+                if (Foes[i].ranaway == false)
+                {
+                    
                 int weaponOrArmorReward = Random.Shared.Next(1,3);
                 if (weaponOrArmorReward == 1)
                 {
@@ -259,16 +275,41 @@ while (gameRunning == true) // själva game loopen
                       Guy.AddArmorToInventory(armorSets[Foes[i].lootRarityMod]); // samma som den innan fast för armor
                     Console.WriteLine($"you got a {armorSets[Foes[i].lootRarityMod].name}");
                 }
+                }
 
+               
 
                 Foes.Remove(Foes[i]);
+                i--;
             }
         }
-        if (Foes.Count == 0)
+        if (Foes.Count == 0||playerIsAlive==false)
         {
+            Console.WriteLine("you won");
             inCombat = false;
+            bool continueeee = false;
+            while (continueeee == false)
+            {
+                
+            Console.WriteLine("continue to next round? type n to quit out or y to continue");
+            string continueue = Console.ReadLine();
+
+                if (continueue == "y")
+                {
+                    gameRunning=true;
+                    continueeee=true;
+                }
+                if (continueue == "n")
+                {
+                    gameRunning=false;
+                    continueeee=true;
+                }
+
+
+
+            }
         }
-        Console.ReadLine();
+        
     }
 
 

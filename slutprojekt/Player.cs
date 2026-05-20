@@ -6,8 +6,7 @@ public class Player
     private string name;
     private int hp;
     private int maxHp;
-    private int armor;
-    private int bonusDmg;
+    private int armor=3;
     private int effectivArmor;
     public List<Weapon> weaponsInInventory = [];
     public List<Armor> armorInInventory = [];
@@ -18,13 +17,34 @@ public class Player
     private int level;
     int poisonDurationOnPlayer;
 
+    public int GetPlayerHp()
+    {
+        return hp;
+    }
+
     public void ChangeArmorStat(int amount)
     {
         effectivArmor += amount;
     }
     public void ChangeCurrentHp(int amount)
     {
-        hp += amount;
+
+        hp -= amount-effectivArmor;
+      Console.WriteLine($"you took {amount} damage");
+
+
+    }
+    public void resetAfterCombat()
+    {
+        hp=maxHp;
+        effectivArmor=armor;
+        poisonDurationOnPlayer=0;
+        if (xp >= xpToLevel)
+        {
+            LevelUp();
+            
+
+        }
     }
     public void ApplyPoison(int length)
     {
@@ -92,21 +112,24 @@ if (equipedWeapon.Count > 0)
         }
         equipedArmor.Add(armorInInventory[w]);
         Console.WriteLine($"equiped: {equipedArmor[0].name}");
+        armor=equipedArmor[0].ProtValue();
     }
 
 public void SetStats(int Mhp, string namee)
     {
         maxHp=Mhp;
+        hp = maxHp;
         name=namee;
     }
 
     public void LevelUp()
     {
         maxHp+=10;
-        armor+=5;
+        level++;
         xp=0;
         xpToLevel+=20;
-        bonusDmg+=5;
+        Console.WriteLine($"you leveled up to level {level}");
+        
     }
 
     public void Attack(Enemy target)

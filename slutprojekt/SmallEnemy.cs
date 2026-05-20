@@ -1,5 +1,6 @@
 public class SmallEnemy : Enemy
 {
+     
     public SmallEnemy()
     {
 
@@ -9,10 +10,15 @@ public class SmallEnemy : Enemy
         minDmg = Random.Shared.Next(2, 4);
         lootRarityMod = Random.Shared.Next(0, 3);
         xpReward = Random.Shared.Next(3, 12);
-
+    }
+private BossEnemy leader;
+    public override void PickAttack(Player target)
+    {
+        base.PickAttack(target);
+        Attack(target);
     }
 
-    private BossEnemy leader;
+    
 
     public void setLeader(BossEnemy led)
     {
@@ -38,6 +44,7 @@ public class SmallEnemy : Enemy
         lootRarityMod = 0;
         hp = 0;
         isAlive=false;
+        ranaway=true;
         Console.WriteLine($"{name} ran away");
     }
 }
