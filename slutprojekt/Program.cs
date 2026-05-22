@@ -112,7 +112,7 @@ while (gameRunning == true) // själva game loopen
                             {
                                 Guy.EquipWeapon(i);
                                 selectingWeapon = false;
-                                Console.ReadLine();
+                                
                             }
 
 
@@ -131,7 +131,7 @@ while (gameRunning == true) // själva game loopen
                         {
                             Console.WriteLine("you have to spell correctly");
                         }
-                        Console.ReadLine();
+                        
                     }
                 }
                 else if (wepOrArm == "2")
@@ -153,7 +153,7 @@ while (gameRunning == true) // själva game loopen
                             {
                                 Guy.EquipArmor(i);
                                 selectingArmor = false;
-                                Console.ReadLine();
+                                
                             }
 
 
@@ -171,7 +171,7 @@ while (gameRunning == true) // själva game loopen
                         {
                             Console.WriteLine("you have to spell correctly");
                         }
-                        Console.ReadLine();
+                       
                     }
                 }
                 else if (wepOrArm=="back") // tillbaka till att välja mellan weapon eller armor
